@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>大旺季 · 教材图生视频工作室</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="static/styles.css?20261011-value" />
+
+</head>
+
+<body>
+
+  <div class="toast-stack" id="toastStack"></div>
+
+
+
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a class="logo" href="#">教材图生视频</a>
+
+      <nav class="nav">
+
+        <a href="#project-value">项目成果</a>
+
+        <a href="#principles">功能介绍</a>
+
+        <a href="#workflow">制作流程</a>
+        <a href="#script">脚本设计</a>
+        <a href="#demo">制作工作台</a>
+
+        <a href="#video">成片预览</a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+
+          <div class="badge">
+
+            <span class="star">✦</span>
+
+            英语项目 · 大旺季视频优化
+
+          </div>
+
+          <h1>
+
+            <span class="line-dark">一页教材，</span>
+
+            <span class="line-accent">五幕成课。</span>
+
+          </h1>
+
+          <p class="lead">
+            从教材图片到 AI 教学视频：<strong>读懂教材</strong> →
+            <strong>设计分镜</strong> → <strong>生成画面</strong> →
+            <strong>配音配乐</strong>，输出可直接使用的成片。
+            当前任务：译林二上 U3 单元。
+          </p>
+
+          <div class="hero-actions">
+
+            <button type="button" class="btn btn-primary" id="heroStartBtn">进入制作</button>
+
+            <a class="btn btn-ghost" href="#principles">了解功能</a>
+
+          </div>
+
+          <div class="hero-meta">
+
+            <div class="meta-item">
+
+              <span class="meta-icon" aria-hidden="true">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+
+                  <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+
+                </svg>
+
+              </span>
+
+              <span>读懂教材 → 设计分镜 → 生成画面 → 配音出片</span>
+
+            </div>
+
+            <div class="meta-item">
+
+              <span class="meta-icon" aria-hidden="true">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+
+                  <path d="M5 4h12a2 2 0 0 1 2 2v14l-5-3-5 3-5-3-5 3V6a2 2 0 0 1 2-2z"/>
+
+                </svg>
+
+              </span>
+
+              <span id="demoBookLabel">译林版二上 · U3 Animals at the Zoo</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="hero-visual">
+
+          <div class="hero-video-player" id="heroVideoPlayer">
+
+            <div class="hero-video-frame">
+
+              <video
+                id="heroVideo"
+                class="hero-video"
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/images/p015_1.png"
+              >
+                <source src="assets/video/final.mp4" type="video/mp4" />
+              </video>
+
+              <button type="button" class="hero-video-play" id="heroVideoPlay" aria-label="播放视频">
+                <span class="hero-video-play-icon" aria-hidden="true">▶</span>
+              </button>
+
+            </div>
+
+            <div class="hero-video-bar">
+
+              <span class="hero-video-label">教学成片预览</span>
+
+              <span class="hero-video-badge" id="heroStatsBadge">5 幕镜头 · 图生视频成片</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section project-value" id="project-value" aria-labelledby="project-value-title">
+      <div class="container">
+        <h2 id="project-value-title">让教材成片的方法，可以继续复用。</h2>
+        <p class="project-value-lead">已将真实教材页转为五幕教学成片，并把教材理解、脚本设计与视频制作组织成可重复执行的流程。</p>
+        <dl class="project-value-list">
+          <div><dt>业务问题</dt><dd>教材转视频需要衔接内容理解、分镜、画面与后期。每次从头拆解制作方法，难以把单次成片经验延续到下一份教材。</dd></div>
+          <div><dt>我的贡献</dt><dd>设计教材到成片的制作链路，将脚本与提示词封装为 Skill，按教材内容调整分镜；设置四道制作审核与最终品检，明确每一步的检查节点。</dd></div>
+          <div><dt>AI 如何介入</dt><dd>AI 辅助解析教材、设计分镜和生成画面，工作流衔接超分、拼接与配音。人工审核教材理解、分镜表达和成片质量，让生成内容符合教学要求。</dd></div>
+          <div><dt>落地改善</dt><dd>交付了可播放的教学案例，也留下可复用的制作方法。产线案例中，约 5 个并行任务的视频生成环节约需 <strong>5 分钟</strong>，5 镜头案例制作费用约 <strong>¥52–72 / 条</strong>，为安排生成任务和估算投入提供依据。</dd></div>
+        </dl>
+        <p class="project-value-note">数据口径：约 5 分钟仅指视频生成环节，不包含全流程人工审核与返修；费用不作为含人工的全成本。本页工作台为模拟生成演示，成片为真实产线结果。</p>
+        <a class="btn btn-ghost" href="../../../index.html#projects">返回个人作品集</a>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <p class="eyebrow">功能介绍</p>
+
+          <h2>三大核心模块</h2>
+
+          <p class="sub center">从教材图片到 AI 教学视频，三大模块分工协作，全程 AI 辅助</p>
+
+        </div>
+
+        <div class="feature-grid feature-grid-3" id="principlesGrid">
+
+          <article class="feature-card loading-card">加载中…</article>
+
+          <article class="feature-card loading-card">加载中…</article>
+
+          <article class="feature-card loading-card">加载中…</article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section-alt" id="workflow">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">制作流程</p>
+          <h2>一条完整的 AI 工作流</h2>
+          <p class="sub center">教材 → AI 理解 → 分镜生成 → 视频生成 → 后期优化 → 成片输出</p>
+          <p class="workflow-cost-summary" id="workflowCostSummary"></p>
+        </div>
+        <div class="workflow-shell" id="workflowShell">
+          <nav class="workflow-timeline" id="workflowTimeline" aria-label="制作流程时间轴">
+            <div class="loading-card">加载中…</div>
+          </nav>
+          <div class="workflow-body">
+            <ol class="workflow-pipeline" id="workflowPipeline" aria-label="流程步骤">
+              <li class="loading-card">加载中…</li>
+            </ol>
+            <aside class="workflow-detail" id="workflowDetail" aria-live="polite">
+              <div class="loading-card">加载中…</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="script">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">脚本设计</p>
+          <h2>图生视频脚本 Skill</h2>
+          <p class="sub center" id="scriptSummary">根据教材页面及参考图片，自动拆解故事结构，并生成适用于图生视频的视频脚本。</p>
+        </div>
+
+        <div class="script-pipeline">
+          <!-- 上下流程 -->
+          <div class="script-block script-flow-bar" aria-label="Skill 执行流程">
+            <div class="script-mod-head">
+              <h3>工作流程</h3>
+            </div>
+            <div class="script-flow-bar-track">
+              <span class="script-flow-bar-item">教材 + 参考图</span>
+              <span class="script-flow-bar-arrow" aria-hidden="true">↓</span>
+              <span class="script-flow-bar-item is-skill">图生视频脚本 Skill</span>
+              <span class="script-flow-bar-arrow" aria-hidden="true">↓</span>
+              <div class="script-flow-bar-outs">
+                <span class="script-flow-bar-item is-out">故事结构</span>
+                <span class="script-flow-bar-item is-out">分镜脚本</span>
+                <span class="script-flow-bar-item is-out">提示词</span>
+                <span class="script-flow-bar-item is-out">旁白</span>
+                <span class="script-flow-bar-item is-out">镜头语言</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 输入 · 素材概览条 -->
+          <div class="script-block script-inputs">
+            <div class="script-mod-head">
+              <h3>输入</h3>
+              <span class="script-meta">教材内容 · 页面顺序 · 图片信息 · 台词</span>
+            </div>
+            <div class="script-material-bar" id="scriptInputs">
+              <div class="loading-card">加载中…</div>
+            </div>
+          </div>
+
+          <!-- 固定提示词模板 · 默认折叠 -->
+          <details class="script-template-fold">
+            <summary class="script-template-summary">
+              <span class="script-template-summary-text" id="scriptTemplateSummary">固定提示词模板 · Skill</span>
+              <span class="script-template-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="script-template-body">
+              <div class="script-rules" id="scriptTemplate">加载中…</div>
+              <div class="script-template-divider" aria-hidden="true"></div>
+              <h4 class="script-template-subhead">固定风格</h4>
+              <div class="script-style-fixed" id="scriptStyle">加载中…</div>
+            </div>
+          </details>
+
+          <!-- 输出：生成结果 + 故事结构 + 逐镜（同一卡片） -->
+          <div class="script-block script-output-card">
+            <div class="script-mod-head">
+              <h3>生成结果</h3>
+              <span class="script-meta" id="scriptArcTag">起承转合 · 动态分镜</span>
+            </div>
+            <p class="script-output-summary" id="scriptOutputSummary"></p>
+
+            <div class="script-outline-section">
+              <div class="script-mod-head">
+                <h3>故事结构</h3>
+                <span class="script-meta">点击某一行查看对应分镜详情</span>
+              </div>
+              <div class="script-table-wrap">
+                <table class="script-table script-table-selectable" id="scriptArcTable">
+                  <thead>
+                    <tr>
+                      <th>幕</th>
+                      <th>结构</th>
+                      <th>场景</th>
+                      <th>参考图</th>
+                      <th>镜头</th>
+                      <th>情绪</th>
+                      <th>教材台词</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="script-scene-panel" id="scriptScenePanel">
+              <div class="script-scene-panel-head">
+                <div class="script-mod-head">
+                  <h3>逐镜脚本</h3>
+                  <span class="script-meta" id="scriptShotTag">1 参考图 = 1 视频</span>
+                </div>
+                <div class="script-scene-tabs" id="scriptSceneTabs" aria-label="分镜切换"></div>
+              </div>
+              <div class="script-scenes" id="scriptScenes">
+                <div class="loading-card">加载中…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="demo">
+
+      <div class="container demo-layout">
+
+        <div class="demo-panel">
+
+          <div class="section-head left">
+
+            <p class="eyebrow">制作工作台</p>
+
+            <h2>图生视频流程演示</h2>
+
+            <p class="sub">译林二上 U3 单元 · 一键演示：读懂教材 → 设计分镜 → 生成画面 → 配音出片</p>
+
+          </div>
+
+
+
+          <div class="step-track" id="stepTrack">
+
+            <div class="step-item" data-step="vision">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">读懂教材</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="prompt">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">设计分镜</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="seedance">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">生成画面</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="upscale">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">提升画质</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="ffmpeg">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">拼接画面</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="audio">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">配音配乐</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="done">
+
+              <span class="step-dot"></span>
+
+              <span class="step-label">成片</span>
+
+            </div>
+
+          </div>
+
+
+
+          <form class="demo-form" id="demoForm" onsubmit="return false">
+
+            <div class="info-blocks">
+
+              <div class="info-block">
+
+                <span class="info-block-label">教材单元</span>
+
+                <span class="info-block-value" id="fieldBook">—</span>
+
+              </div>
+
+              <div class="info-block">
+
+                <span class="info-block-label">镜头数量</span>
+
+                <span class="info-block-value" id="fieldShots">—</span>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="phase-panel" id="phaseSelectPanel">
+
+              <div class="phase-head">
+
+                <span class="phase-num">①</span>
+
+                <div>
+
+                  <strong id="phaseActionTitle">选用教材原图</strong>
+
+                  <p id="phaseActionHint">请先点击选用本单元教材扫描页，再开始识读</p>
+
+                </div>
+
+                <span class="engine-badge">分步执行</span>
+
+              </div>
+
+              <div class="textbook-picker" id="textbookPicker">
+
+                <div class="loading-card">加载教材页…</div>
+
+              </div>
+
+              <button type="button" class="btn btn-primary" id="phaseActionBtn" disabled>
+
+                <span class="btn-spinner panel-hidden" id="phaseActionSpinner"></span>
+
+                <span id="phaseActionBtnText">开始识读教材</span>
+
+              </button>
+
+            </div>
+
+
+
+            <div class="demo-actions">
+
+              <span class="status-chip" id="statusChip">待开始</span>
+
+            </div>
+
+          </form>
+
+
+
+          <div class="progress-block" id="progressBlock">
+
+            <div class="progress-top">
+
+              <span id="progressLabel">等待开始</span>
+
+              <span id="progressPct">0%</span>
+
+            </div>
+
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+            <div class="log-console" id="logConsole"><span class="muted">先选用教材原图，再逐步点击执行各阶段</span></div>
+
+          </div>
+
+        </div>
+
+
+
+        <aside class="menu-preview" id="video">
+
+          <div class="menu-card">
+
+            <p class="eyebrow" id="outputEyebrow">步骤产出</p>
+
+            <h3 id="outputTitle">待开始</h3>
+
+            <p class="output-desc" id="outputDesc"></p>
+
+            <div class="output-body" id="outputBody"></div>
+
+            <div class="stats-row panel-hidden" id="outputStats"></div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section-alt" id="tech">
+      <div class="container">
+        <div class="section-head">
+          <h2>AI 提效，人工保质。</h2>
+          <p class="sub center">关键节点设置制作审核与品检验收，AI 不直接放行 · 点击步骤查看详情</p>
+        </div>
+        <div class="collab-shell" id="aiCapShell">
+          <div class="collab-board">
+            <div class="collab-rail" aria-hidden="true">
+              <span class="collab-rail-icon is-ai" title="AI">🤖</span>
+              <span class="collab-rail-icon is-human" title="人工">👤</span>
+            </div>
+            <div class="collab-track" id="aiCapFlow" role="list" aria-label="协作流程">
+              <div class="loading-card">加载中…</div>
+            </div>
+          </div>
+          <aside class="collab-detail" id="aiCapDetail" aria-live="polite">
+            <div class="loading-card">加载中…</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+  <footer class="site-footer">
+
+    <div class="container footer-inner">
+
+      <span>大旺季视频优化 · 教材图生视频 · 读懂教材 → 设计分镜 → AI 出片</span>
+
+      <span id="healthStatus">● 系统就绪</span>
+
+    </div>
+
+  </footer>
+
+
+
+  <div class="image-lightbox panel-hidden" id="imageLightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+
+    <button type="button" class="image-lightbox-backdrop" id="lightboxBackdrop" aria-label="关闭"></button>
+
+    <div class="image-lightbox-panel">
+
+      <button type="button" class="image-lightbox-close" id="lightboxClose" aria-label="关闭">×</button>
+
+      <p class="image-lightbox-caption" id="lightboxCaption"></p>
+
+      <img id="lightboxImg" alt="放大预览" />
+
+    </div>
+
+  </div>
+
+
+
+  <script src="static/app.js"></script>
+
+</body>
+
+</html>
+

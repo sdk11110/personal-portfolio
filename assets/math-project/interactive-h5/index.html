@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="description" content="Math in Motion — 数学互动 H5、数学视频、几何动画与教具设计的沉浸式项目档案。" />
+    <title>Math in Motion / 数学在运动</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="boot-screen" data-boot aria-live="polite">
+      <div class="boot-orbit" aria-hidden="true">
+        <span class="orbit-dot orbit-dot-a"></span>
+        <span class="orbit-dot orbit-dot-b"></span>
+        <span class="orbit-ring"></span>
+        <span class="orbit-cross"></span>
+      </div>
+      <figure class="boot-image" data-boot-image aria-hidden="true">
+        <div class="boot-image-frame">
+          <img src="assets/generated/math-archive-intro.jpg" alt="" />
+          <span class="boot-image-scan"></span>
+          <span class="boot-image-mark">ARCHIVE / 04</span>
+          <span class="boot-image-index">01 — 05</span>
+        </div>
+        <figcaption>VISUAL FIELD / 数学档案正在显影</figcaption>
+      </figure>
+      <div class="boot-meta"><span>FIELD NOTE 04</span><span>STUDIO / 01</span></div>
+      <div class="boot-copy">
+        <span class="eyebrow">INITIALIZING THE STUDIO</span>
+        <strong data-boot-progress>00%</strong>
+        <span class="boot-line" aria-hidden="true"><i data-boot-bar></i></span>
+        <span data-boot-status>ARRANGING LINES / 正在排列线条</span>
+      </div>
+    </div>
+    <div class="cinema-wipe" aria-hidden="true"><i></i><b></b><em></em></div>
+
+    <header class="site-chrome">
+      <a class="brand-mark" href="../../../index.html#projects" aria-label="返回作品集">
+        <span class="brand-symbol" aria-hidden="true"><i></i><b></b><em></em></span>
+        <span><strong>MATH IN<br />MOTION</strong><small>PROJECT ARCHIVE / 04</small></span>
+      </a>
+      <div class="chrome-actions">
+        <button class="chrome-button" type="button" data-sound aria-pressed="false"><span class="sound-dot"></span><span data-sound-label>SOUND OFF</span></button>
+        <button class="chrome-button menu-trigger" type="button" data-menu aria-expanded="false" aria-controls="chapter-menu"><span class="menu-glyph"><i></i><i></i></span><span>MENU</span></button>
+      </div>
+    </header>
+
+    <aside class="progress-rail" aria-label="章节进度">
+      <span class="rail-label">DEPTH / 01</span>
+      <div class="rail-line"><i data-progress-fill></i></div>
+      <div class="rail-chapters">
+        <button type="button" data-chapter="intro" aria-label="跳到开场">00</button>
+        <button type="button" data-chapter="interaction" aria-label="跳到数学 H5">01</button>
+        <button type="button" data-chapter="video-lab" aria-label="跳到数学视频">02</button>
+        <button type="button" data-chapter="capabilities" aria-label="跳到能力档案">03</button>
+        <button type="button" data-chapter="geometry" aria-label="跳到几何动画">04</button>
+        <button type="button" data-chapter="teaching-tools" aria-label="跳到教具">05</button>
+        <button type="button" data-chapter="closing" aria-label="跳到结尾">06</button>
+      </div>
+    </aside>
+
+    <div class="menu-panel" id="chapter-menu" data-menu-panel aria-hidden="true">
+      <div class="menu-backdrop" data-close-menu></div>
+      <div class="menu-sheet">
+        <div class="menu-sheet-top"><span class="eyebrow">THE FIELD GUIDE</span><button class="close-menu" type="button" data-close-menu aria-label="关闭章节菜单">CLOSE <b>×</b></button></div>
+        <div class="menu-title"><span>CHAPTERS</span><h2>One concept,<br /><i>many surfaces.</i></h2></div>
+        <nav class="chapter-nav" aria-label="主章节导航">
+          <a class="chapter-card chapter-card-intro" href="#intro" data-chapter="intro">
+            <small class="chapter-card-index">00 / OPENING</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">The Studio<br /><em>Begins</em></span>
+            <span class="chapter-card-meta">INTRO / 总览</span><p>从一个问题出发，让数学进入画面。</p>
+          </a>
+          <a class="chapter-card chapter-card-interaction" href="#interaction" data-chapter="interaction">
+            <small class="chapter-card-index">01 / INTERACTION</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">The Relation<br /><em>Moves</em></span>
+            <span class="chapter-card-meta">H5 / DRAG &amp; TAP</span><p>拖动数字，观察平均数如何保持不变。</p>
+          </a>
+          <a class="chapter-card chapter-card-video" href="#video-lab" data-chapter="video-lab">
+            <small class="chapter-card-index">02 / VIDEO LAB</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">The Rule<br /><em>Becomes a Scene</em></span>
+            <span class="chapter-card-meta">LOCAL VIDEO / MANIM</span><p>进入真实讲解视频与数学分镜。</p>
+          </a>
+          <a class="chapter-card chapter-card-capabilities" href="#capabilities" data-chapter="capabilities">
+            <small class="chapter-card-index">03 / CAPABILITIES</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">The System<br /><em>Behind It</em></span>
+            <span class="chapter-card-meta">PROJECTS / SKILLS / AI</span><p>看见项目、能力与 AI 协作方式。</p>
+          </a>
+          <a class="chapter-card chapter-card-geometry" href="#geometry" data-chapter="geometry">
+            <small class="chapter-card-index">04 / GEOMETRY</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">Draw the<br /><em>Reasoning</em></span>
+            <span class="chapter-card-meta">SVG / ELEMENTARY GEOMETRY</span><p>让每一条辅助线都留下决策。</p>
+          </a>
+          <a class="chapter-card chapter-card-tools" href="#teaching-tools" data-chapter="teaching-tools">
+            <small class="chapter-card-index">05 / OBJECTS</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">The Hand<br /><em>Finds the Idea</em></span>
+            <span class="chapter-card-meta">TEACHING OBJECTS / GAME</span><p>先操作、再比较，最后理解。</p>
+          </a>
+          <a class="chapter-card chapter-card-closing" href="#closing" data-chapter="closing">
+            <small class="chapter-card-index">06 / METHOD</small><span class="chapter-card-arrow">↗</span>
+            <span class="chapter-card-title">Make the Idea<br /><em>Travel</em></span>
+            <span class="chapter-card-meta">CASE NOTE / PORTFOLIO</span><p>把复杂的东西整理成可进入的体验。</p>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <main>
+      <section class="scene scene-intro is-active" id="intro" data-scene="intro">
+        <div class="intro-grid" aria-hidden="true"></div>
+        <div class="floating-formula formula-one">(a + b)² = a² + 2ab + b²</div>
+        <div class="floating-formula formula-two">x → y → ?</div>
+        <div class="intro-copy scene-copy" data-reveal>
+          <span class="chapter-kicker"><b>INTRO / 00</b><i></i><span>FIELD NOTES FROM A MATH STUDIO</span></span>
+          <h1>A concept<br /><em>is not static.</em></h1>
+          <p class="intro-lede">数学不是答案的终点。<br />它是一种可以被看见、被操作、被重新解释的结构。</p>
+          <p class="intro-en">Math becomes understandable when it can move between a screen, a frame, a line and a hand.</p>
+          <div class="intro-actions"><button class="primary-button" type="button" data-start>START NOW <span>↗</span></button><button class="text-button" type="button" data-skip>SKIP INTRO <span>→</span></button></div>
+        </div>
+        <div class="intro-visual" data-reveal aria-hidden="true">
+          <div class="formula-card card-a"><small>01 / RELATION</small><strong>4 + 8 + 12</strong><i></i></div>
+          <div class="formula-card card-b"><small>02 / MOTION</small><strong>∠</strong><i></i></div>
+          <div class="formula-card card-c"><small>03 / EXPLAIN</small><strong>→</strong><i></i></div>
+          <div class="axis-mark axis-x"></div><div class="axis-mark axis-y"></div><div class="axis-circle"></div>
+        </div>
+        <div class="scene-footer"><span>INTERACTIVE H5 · MOTION VIDEO · GEOMETRY · TEACHING OBJECTS</span><span>SCROLL TO DESCEND <b>↓</b></span></div>
+      </section>
+
+      <section class="scene scene-interaction" id="interaction" data-scene="interaction">
+        <div class="scene-bg scene-bg-grid" aria-hidden="true"></div>
+        <div class="scene-copy narrow-copy" data-reveal><span class="chapter-kicker"><b>CHAPTER 01</b><i></i><span>INTERACTION / 互动 H5</span></span><h2>Let the<br /><em>relation move.</em></h2><p>把抽象的逻辑放进一个可以操作的场景。数字不是静态答案，它们之间的关系会随着手的动作重新排列。</p><p class="copy-en">The interaction gives a concept a surface, a rhythm and a response.</p><span class="side-note">CASE / MATH H5<br />HIGH-INTERACTION LOGIC</span></div>
+        <div class="math-studio" data-reveal>
+          <div class="studio-topline"><span>EXPERIMENT 01 / AVERAGE</span><span>DRAG OR TAP TO REORDER</span></div>
+          <div class="studio-stage">
+            <div class="stage-coordinate coord-top">Y = <b>?</b></div><div class="stage-coordinate coord-bottom">X / 01—12</div>
+            <div class="mean-orbit"><span>MEAN</span><strong data-mean>8</strong><small>平均数</small></div>
+            <div class="number-tray" data-tile-zone aria-label="可重新排列的数字卡"></div>
+            <div class="studio-signal"><i></i><span data-demo-status>READY TO REORDER / 等待排列</span></div>
+          </div>
+          <div class="studio-controls"><button class="outline-button" type="button" data-reset-demo>RESET / 重置</button><span>Tap a tile, then tap another tile to move it.</span></div>
+        </div>
+        <div class="scene-footer"><span>TOUCH → OBSERVE → UNDERSTAND</span><span>01 / 05</span></div>
+      </section>
+
+      <section class="scene scene-video" id="video-lab" data-scene="video-lab">
+        <div class="video-sun" aria-hidden="true"></div>
+        <div class="scene-copy video-copy" data-reveal><span class="chapter-kicker"><b>CHAPTER 02</b><i></i><span>VIDEO LAB / 数学视频</span></span><h2>Turn a rule<br /><em>into a scene.</em></h2><p>从平均数讲解到数学分镜，把“怎么解释”变成可进入的画面。每一帧都在处理节奏、顺序和理解的落点。</p><span class="side-note">MATH EXPLAINERS<br />STORYBOARD / DELIVERY NOTES</span></div>
+        <div class="film-room" data-reveal>
+          <div class="film-screen"><video class="case-video" data-case-video src="assets/videos/cryptogram_full_tts.mp4" poster="assets/videos/cryptogram-full-poster.jpg" preload="metadata" playsinline controls aria-label="Cryptogram 完整数学讲解视频"></video><div class="video-wash" aria-hidden="true"></div><div class="screen-caption"><span data-shot-number>FINAL / TTS · 155 SEC</span><strong data-shot-title>THE FINISHED EXPLAINER</strong><small data-shot-copy>完整讲解成品，画面、配音和解释节奏已经合成。</small></div><button class="play-mark" type="button" data-video-toggle aria-label="播放视频">▶</button></div>
+          <div class="film-controls"><span>LOCAL VIDEO / 本地成品</span><i><b></b></i><span data-video-file>cryptogram_full_tts.mp4</span></div>
+          <div class="storyboard-rail" role="list" aria-label="数学视频分镜">
+            <button class="storyboard-card" type="button" data-storyboard="final-silent" aria-label="完整无声母版"><small>FINAL 01</small><strong>SILENT / MASTER</strong><i></i></button>
+            <button class="storyboard-card is-current" type="button" data-storyboard="final-tts" aria-label="完整 TTS 讲解版"><small>FINAL 02</small><strong>TTS / EXPLAINER</strong><i></i></button>
+            <button class="storyboard-card" type="button" data-storyboard="final-60fps" aria-label="完整 60fps 展示母版"><small>FINAL 03</small><strong>60FPS / 1440P</strong><i></i></button>
+          </div>
+          <div class="video-method" aria-label="视频制作流程">
+            <div class="video-method-head"><span>HOW THIS VIDEO WAS MADE / 制作链路</span><span>SOURCE PROJECT / CRYPTOGRAM</span></div>
+            <div class="video-method-map" role="list">
+              <button type="button" class="video-method-step is-current" data-video-method="question"><small>01</small><strong>QUESTION</strong><span>拆题</span></button>
+              <button type="button" class="video-method-step" data-video-method="manim"><small>02</small><strong>MANIM</strong><span>构造</span></button>
+              <button type="button" class="video-method-step" data-video-method="voice"><small>03</small><strong>VOICE</strong><span>讲解</span></button>
+              <button type="button" class="video-method-step" data-video-method="reveal"><small>04</small><strong>H5</strong><span>包装</span></button>
+            </div>
+            <div class="video-method-detail"><span data-method-kicker>01 / QUESTION</span><strong data-method-title>先把题目拆成可讲的顺序</strong><p data-method-copy>从 Cryptogram 的题目出发，先确定观众要看到什么、什么时候看到，再进入动画。</p><small data-method-tools>题目分析 · 讲解结构 · storyboard</small></div>
+          </div>
+        </div>
+        <div class="scene-footer"><span>AVERAGE · STORYBOARD · ERROR DELIVERY NOTES</span><span>02 / 06</span></div>
+      </section>
+
+      <section class="scene scene-capabilities" id="capabilities" data-scene="capabilities">
+        <div class="capability-grid" aria-hidden="true"></div>
+        <div class="scene-copy capabilities-copy" data-reveal><span class="chapter-kicker"><b>CHAPTER 03</b><i></i><span>CAPABILITY ARCHIVE / 能力档案</span></span><h2>Show the<br /><em>system behind it.</em></h2><p>视频只是结果。真正的能力，是把问题拆成结构、把结构变成画面，再把画面做成别人可以进入的体验。</p><p class="copy-en">The work is not only what appears on screen. It is the system that makes the experience possible.</p><span class="side-note">PROJECTS / SKILLS / AI WORKFLOW<br />FROM IDEA TO SHIPPABLE H5</span></div>
+        <div class="capability-board" data-reveal>
+          <div class="capability-board-top"><span>WHAT I CAN BUILD / 我能做什么</span><span>IDEA → LOGIC → MOTION → DELIVERY</span></div>
+          <div class="capability-columns">
+            <article class="capability-panel capability-projects">
+              <div class="capability-panel-head"><small>01 / PROJECTS</small><strong>PROJECTS IN USE</strong></div>
+              <div class="project-list">
+                <div class="project-row"><b>01</b><span><strong>Math in Motion</strong><small>HTML / CSS / JS · immersive H5</small></span><i>H5</i></div>
+                <div class="project-row"><b>02</b><span><strong>Cryptogram</strong><small>Manim / Python · TTS explainers</small></span><i>VIDEO</i></div>
+                <div class="project-row"><b>03</b><span><strong>Dive Log</strong><small>case packaging · portfolio integration</small></span><i>WEB</i></div>
+                <div class="project-row"><b>04</b><span><strong>Teaching Objects</strong><small>game-like tools · math interaction</small></span><i>EDU</i></div>
+              </div>
+            </article>
+            <article class="capability-panel capability-skills">
+              <div class="capability-panel-head"><small>02 / SKILL STACK</small><strong>FROM LOGIC TO SURFACE</strong></div>
+              <div class="skill-list">
+                <div class="skill-item"><span>ART DIRECTION</span><i><b style="--skill-level: 92%"></b></i><small>mood / composition / visual system</small></div>
+                <div class="skill-item"><span>INTERACTIVE H5</span><i><b style="--skill-level: 90%"></b></i><small>HTML / CSS / JS / responsive</small></div>
+                <div class="skill-item"><span>MOTION DESIGN</span><i><b style="--skill-level: 88%"></b></i><small>clip-path / reveal / camera drift</small></div>
+                <div class="skill-item"><span>MATH VISUALIZATION</span><i><b style="--skill-level: 86%"></b></i><small>Manim / SVG / geometry reasoning</small></div>
+                <div class="skill-item"><span>PACKAGING &amp; QA</span><i><b style="--skill-level: 84%"></b></i><small>local assets / browser validation</small></div>
+              </div>
+            </article>
+            <article class="capability-panel capability-ai">
+              <div class="capability-panel-head"><small>03 / AI WORKFLOW</small><strong>AI AS A STUDIO PARTNER</strong></div>
+              <div class="ai-list">
+                <div class="ai-row"><b>CODEX</b><span><strong>结构、代码、调试</strong><small>页面架构、交互逻辑、动效实现、回归检查</small></span></div>
+                <div class="ai-row"><b>IMAGEGEN</b><span><strong>视觉草图与档案图</strong><small>章节背景、氛围图、占位图和视觉方向探索</small></span></div>
+                <div class="ai-row is-human"><b>HUMAN</b><span><strong>判断、内容、审美</strong><small>选题、数学逻辑、分镜节奏、取舍与最终验证</small></span></div>
+              </div>
+              <p class="ai-note">AI helps me move faster. The concept, constraints and final decisions remain mine.</p>
+            </article>
+          </div>
+          <div class="capability-board-bottom"><span>TOOLS ARE THE SURFACE</span><strong>METHOD IS THE SKILL.</strong><span>可复用的方法，才是能力</span></div>
+        </div>
+        <div class="scene-footer"><span>PROJECTS · SKILLS · AI · HUMAN JUDGMENT</span><span>03 / 06</span></div>
+      </section>
+
+      <section class="scene scene-geometry" id="geometry" data-scene="geometry">
+        <div class="scene-copy geometry-copy" data-reveal><span class="chapter-kicker"><b>CHAPTER 04</b><i></i><span>GEOMETRY IN MOTION / 几何动画</span></span><h2>Draw the<br /><em>reasoning.</em></h2><p>小学几何概念不只需要被说出来，也可以通过线、角、路径和构造顺序被看见。</p><p class="copy-en">A line is not decoration when it shows why a shape works.</p><span class="side-note">MANIM STUDIES<br />ELEMENTARY GEOMETRY</span></div>
+        <div class="geometry-lab" data-reveal>
+          <svg viewBox="0 0 640 500" role="img" aria-label="由辅助线构成的几何动画示意图">
+            <defs><linearGradient id="lineGlow" x1="0" x2="1"><stop stop-color="#d9e85b" stop-opacity="0"/><stop offset=".5" stop-color="#d9e85b"/><stop offset="1" stop-color="#d9e85b" stop-opacity="0"/></linearGradient></defs>
+            <path class="geom-line geom-axis" d="M72 388H570M120 82V430"/><path class="geom-line geom-main" d="M120 388L372 116L540 388Z"/><path class="geom-line geom-helper" d="M372 116V388M120 388L540 388"/><circle class="geom-point point-a" cx="120" cy="388" r="7"/><circle class="geom-point point-b" cx="372" cy="116" r="7"/><circle class="geom-point point-c" cx="540" cy="388" r="7"/><path class="geom-arc" d="M158 388A38 38 0 0 1 145 360"/><path class="geom-sheen" d="M90 388L342 116L510 388Z"/>
+            <text x="102" y="420">A</text><text x="363" y="94">B</text><text x="548" y="420">C</text><text x="390" y="350">h</text>
+          </svg>
+          <div class="geometry-caption"><span>CONSTRUCT / 03</span><strong>Every line holds a decision.</strong><small>路径、关系、顺序 / PATH · RELATION · SEQUENCE</small></div>
+        </div>
+        <div class="scene-footer"><span>LINE BY LINE / FRAME BY FRAME</span><span>04 / 06</span></div>
+      </section>
+
+      <section class="scene scene-tools" id="teaching-tools" data-scene="teaching-tools">
+        <div class="scene-copy tools-copy" data-reveal><span class="chapter-kicker"><b>CHAPTER 05</b><i></i><span>TEACHING OBJECTS / 教具</span></span><h2>Let the hand<br /><em>find the idea.</em></h2><p>教具、游戏化教学和互动 H5 都在做同一件事：先让手找到关系，再让语言跟上理解。</p><span class="side-note">TOUCH / COMPARE / UNDERSTAND</span></div>
+        <div class="tools-board" data-reveal>
+          <div class="tool-shelf"><span>OBJECTS IN STUDY</span><i></i><i></i><i></i><i></i></div>
+          <div class="tool-objects"><button type="button" class="tool-object object-circle" data-tool-step="0" aria-label="操作圆形教具"><b></b><span>CIRCLE</span></button><button type="button" class="tool-object object-bars" data-tool-step="1" aria-label="比较长度教具"><b></b><b></b><b></b><span>COMPARE</span></button><button type="button" class="tool-object object-fold" data-tool-step="2" aria-label="展开几何教具"><b></b><span>UNFOLD</span></button></div>
+          <div class="tool-steps"><button class="tool-step is-current" type="button" data-tool-step="0"><small>01</small><strong>TOUCH</strong><span>先操作</span></button><button class="tool-step" type="button" data-tool-step="1"><small>02</small><strong>COMPARE</strong><span>再比较</span></button><button class="tool-step" type="button" data-tool-step="2"><small>03</small><strong>UNDERSTAND</strong><span>最后理解</span></button></div>
+          <div class="tool-method-note">
+            <div class="tool-method-head"><span>MATHIGON PATTERN / 教具交互逻辑</span><span>GRAB → SNAP → VALIDATE</span></div>
+            <div class="tool-method-flow"><button type="button" class="tool-method-step is-current" data-tool-method="0">GRAB / 拿起</button><button type="button" class="tool-method-step" data-tool-method="1">SNAP / 吸附</button><button type="button" class="tool-method-step" data-tool-method="2">VALIDATE / 反馈</button></div>
+            <div class="tool-insight"><strong data-tool-title>GRAB / 直接操作</strong><p data-tool-copy>先让手拿起、拖动或改变数量，概念从一个动作开始。</p><small data-tool-output>CAN MAKE / 几何拖拽 · 计数操作 · 分数切分</small></div>
+            <div class="tool-library"><span>CUBOID</span><span>CYLINDER</span><span>STICKS</span><span>CUBES</span><span>CLOCK</span><span>BALANCE</span></div>
+          </div>
+        </div>
+        <div class="scene-footer"><span>FROM OBJECT TO EXPERIENCE</span><span>05 / 06</span></div>
+      </section>
+
+      <section class="scene scene-closing" id="closing" data-scene="closing">
+        <div class="closing-grid" aria-hidden="true"></div>
+        <div class="closing-copy" data-reveal><span class="chapter-kicker"><b>FIELD NOTE / 06</b><i></i><span>THE METHOD REMAINS</span></span><h2>Make the<br /><em>idea travel.</em></h2><p>从纸面到视频，从 H5 到教具，方法始终是把复杂的东西整理成别人可以进入、操作和继续使用的体验。</p><div class="method-route"><span>拆解问题</span><i></i><span>组织逻辑</span><i></i><span>设计画面</span><i></i><span>加入交互</span><i></i><span>验证理解</span></div><a class="primary-button" href="../../../index.html#projects">RETURN TO PROJECT INDEX <span>↗</span></a></div>
+        <div class="closing-stamp" aria-hidden="true"><span>PERSONAL<br />PORTFOLIO</span><strong>∞</strong><small>MATH IN MOTION<br />CASE / 02</small></div>
+        <div class="scene-footer"><span>END OF CASE / BEGINNING OF ANOTHER ROUTE</span><span>06 / 06</span></div>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

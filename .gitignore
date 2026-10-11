@@ -1,0 +1,32 @@
+# Local archives (too large for GitHub)
+*.zip
+文创.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Local-only notes / internal docs (optional keep out of public portfolio)
+docs/
+output/
+china-history-video/
+remotion-explain/
+video-animation-polish/
+A-roll*/
+视频*/
+*.md
+!README.md
+
+# Local tests (keep portfolio deploy lean)
+*.test.mjs
+*.test.cjs
+*.test.js
+
+# Node / test caches if any
+node_modules/
+.npm/
+coverage/

@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f0efeb" />
+  <title>Tool Platform / Content Training</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    /* ---------- tokens ---------- */
+    :root {
+      --paper: #f0efeb;
+      --paper-veil: rgba(240, 239, 235, .9);
+      --ink: #1c1c1a;
+      --ink-faint: rgba(28, 28, 26, .32);
+      --muted: #73736c;
+      --violet: #863bff;
+      --lime: #d9e85b;
+      --lavender: #a7a8d6;
+      --green: #2dbb72;
+      --line: #c9c8c1;
+      --ease-out: cubic-bezier(.23, 1, .32, 1);
+      --ease-io: cubic-bezier(.77, 0, .175, 1);
+      --sans: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --serif: "Iowan Old Style", Baskerville, Georgia, "Songti SC", "STSong", serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --gutter: clamp(20px, 4vw, 64px);
+      --progress: 0;
+      --hero-p: 0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--paper); overflow-x: clip; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--paper);
+      font: 15px/1.6 var(--sans);
+      overflow-x: clip;
+    }
+
+    html.js body:not(.is-loaded) { overflow: hidden; }
+
+    ::selection { color: var(--paper); background: var(--violet); }
+
+    button { font: inherit; }
+
+    :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+
+    main {
+      width: min(1240px, calc(100% - 2 * var(--gutter)));
+      margin: auto;
+    }
+
+    /* ---------- grain ---------- */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+    }
+
+    /* ---------- cursor ring (fine pointer only, JS-enabled) ---------- */
+    .cursor-ring {
+      position: fixed;
+      top: -17px;
+      left: -17px;
+      z-index: 95;
+      display: none;
+      width: 34px;
+      height: 34px;
+      pointer-events: none;
+      will-change: transform;
+    }
+    body.has-cursor .cursor-ring { display: block; }
+    .cursor-ring::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      transition: transform .25s var(--ease-out), background-color .25s var(--ease-out), border-color .25s var(--ease-out);
+    }
+    .cursor-ring.is-on::before {
+      transform: scale(1.7);
+      border-color: var(--violet);
+      background: rgba(217, 232, 91, .35);
+    }
+
+    /* ---------- loader curtain ---------- */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      background: var(--ink);
+      color: var(--paper);
+      transition: transform .7s var(--ease-io) .12s;
+      will-change: transform;
+    }
+    html:not(.js) .loader { display: none; }
+    body.is-loaded .loader { transform: translateY(-101%); }
+    .loader-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      padding: 0 var(--gutter) 26px;
+      transition: opacity .3s var(--ease-out);
+    }
+    body.is-loaded .loader-inner { opacity: 0; }
+    .loader-word {
+      font: 11px/1.4 var(--mono);
+      letter-spacing: .14em;
+      color: rgba(240, 239, 235, .66);
+    }
+    .loader-count {
+      font: 800 clamp(54px, 9vw, 110px)/.82 var(--sans);
+      letter-spacing: -.05em;
+      color: var(--lime);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ---------- fixed chrome ---------- */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      height: 2px;
+      pointer-events: none;
+    }
+    .progress i {
+      display: block;
+      height: 100%;
+      background: var(--violet);
+      transform: scaleX(var(--progress));
+      transform-origin: 0 50%;
+    }
+
+    .topline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 70;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 17px var(--gutter) 15px;
+      border-bottom: 1px solid transparent;
+      background: transparent;
+      font: 11px/1.2 var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: border-color .4s var(--ease-out), background-color .4s var(--ease-out), opacity .8s var(--ease-out) .55s, transform .8s var(--ease-out) .55s;
+    }
+    html.js body:not(.is-loaded) .topline { opacity: 0; transform: translateY(-8px); }
+    body.is-scrolled .topline {
+      border-color: var(--ink);
+      background: var(--paper-veil);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .topline b { color: var(--violet); }
+
+    /* ---------- hero ---------- */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 40px;
+      align-items: end;
+      min-height: 86vh;
+      padding: clamp(120px, 18vh, 190px) 0 64px;
+    }
+    .hero-main { transform: translateY(calc(var(--hero-p) * -30px)); }
+
+    .hero-kicker {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font: 11px/1.4 var(--mono);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .hero-kicker b { color: var(--ink); font-weight: 400; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 10.5vw, 148px);
+      line-height: .94;
+      letter-spacing: -.045em;
+      font-weight: 800;
+    }
+    h1 em {
+      padding-right: .06em;
+      color: var(--violet);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    .mask { display: block; overflow: hidden; }
+    .mask-line { display: block; padding: 0 .08em .04em 0; }
+    html.js .mask-line {
+      transform: translateY(118%);
+      transition: transform 1s var(--ease-out) var(--d, 0ms);
+      will-change: transform;
+    }
+    html.js body.is-loaded .mask-line { transform: translateY(0); }
+
+    .hero-side {
+      display: grid;
+      gap: 30px;
+      justify-items: start;
+      transform: translateY(calc(var(--hero-p) * -14px));
+    }
+    .lede {
+      max-width: 360px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .hero-meta li {
+      padding: 7px 12px 6px;
+      border: 1px solid var(--ink);
+      font: 10px/1.2 var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .hero-meta li b { color: var(--violet); font-weight: 400; }
+
+    html.js [data-hero-fade] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s var(--ease-out) var(--d, 0ms), transform .8s var(--ease-out) var(--d, 0ms);
+    }
+    html.js body.is-loaded [data-hero-fade] { opacity: 1; transform: translateY(0); }
+
+    .hero-badge {
+      position: absolute;
+      right: 8px;
+      top: clamp(120px, 17vh, 180px);
+      width: clamp(96px, 11vw, 138px);
+      height: auto;
+      transform: translateY(calc(var(--hero-p) * 46px));
+    }
+    .hero-badge text {
+      fill: var(--ink);
+      font: 600 10.5px var(--mono);
+      letter-spacing: .32em;
+    }
+    .hero-badge .badge-spin {
+      transform-origin: 60px 60px;
+      animation: badge-spin 18s linear infinite;
+    }
+    .hero-badge .badge-core { fill: var(--violet); }
+    @keyframes badge-spin { to { transform: rotate(360deg); } }
+
+    .scroll-hint {
+      position: absolute;
+      left: 2px;
+      bottom: 26px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font: 10px/1 var(--mono);
+      letter-spacing: .22em;
+    }
+    .scroll-hint i {
+      font-style: normal;
+      animation: hint-dip 2.1s var(--ease-io) infinite;
+    }
+    @keyframes hint-dip {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ---------- marquee ---------- */
+    .marquee {
+      overflow: hidden;
+      margin: 0 calc(50% - 50vw);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: var(--lime);
+    }
+    .marquee--violet { background: var(--violet); color: var(--paper); }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-left 30s linear infinite;
+      will-change: transform;
+    }
+    .marquee--violet .marquee-track { animation-direction: reverse; }
+    .marquee-chunk {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      padding: 13px 17px 12px;
+      font: 12px/1 var(--mono);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .marquee-chunk em { font-style: normal; opacity: .55; }
+    @keyframes marquee-left { to { transform: translateX(-50%); } }
+
+    /* ---------- chapter nav ---------- */
+    .chapters {
+      --nav-x: 0px;
+      --nav-w: 0px;
+      position: sticky;
+      top: 45px;
+      z-index: 60;
+      display: flex;
+      gap: 4px;
+      margin-top: -1px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-veil);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .chapters::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: var(--nav-w);
+      height: 2px;
+      background: var(--violet);
+      transform: translateX(var(--nav-x));
+      transition: transform .35s var(--ease-out), width .35s var(--ease-out);
+    }
+    .chapters a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 14px 16px 13px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .25s var(--ease-out);
+    }
+    .chapters a i {
+      font: 10px/1 var(--mono);
+      font-style: normal;
+      letter-spacing: .08em;
+      color: var(--violet);
+      opacity: .75;
+    }
+    .chapters a.is-active { color: var(--ink); }
+    @media (hover: hover) and (pointer: fine) {
+      .chapters a:hover { color: var(--ink); }
+    }
+
+    /* ---------- chapters ---------- */
+    .chapter {
+      position: relative;
+      padding: clamp(64px, 10vw, 118px) 0 clamp(44px, 6vw, 72px);
+      scroll-margin-top: 128px;
+    }
+    .chapter + .chapter { border-top: 1px solid var(--line); }
+
+    .chapter-head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px 26px;
+      align-items: end;
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+    .chapter-index {
+      font: 800 clamp(64px, 8vw, 112px)/.8 var(--sans);
+      letter-spacing: -.05em;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink-faint);
+    }
+    .chapter-head h2 {
+      margin: 0;
+      font-size: clamp(30px, 4.4vw, 52px);
+      letter-spacing: -.04em;
+      line-height: 1.04;
+    }
+    .chapter-note {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font: 11px/1.5 var(--mono);
+      letter-spacing: .06em;
+      text-align: right;
+    }
+
+    /* ---------- cards ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      position: relative;
+      min-height: 200px;
+      padding: 22px;
+      border: 1px solid var(--ink);
+      background: #fff;
+      box-shadow: 7px 7px 0 var(--ink);
+      transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+    }
+    .card:nth-child(2) { background: var(--lime); }
+    .card:nth-child(3) { background: var(--lavender); }
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 11px 11px 0 var(--ink);
+      }
+    }
+    .card small {
+      display: block;
+      margin-bottom: 46px;
+      color: var(--muted);
+      font: 10px/1 var(--mono);
+      letter-spacing: .12em;
+    }
+    .card:nth-child(2) small,
+    .card:nth-child(3) small { color: var(--ink); }
+    .card h3 {
+      margin: 0 0 9px;
+      font-size: 25px;
+      letter-spacing: -.04em;
+    }
+    .card p { margin: 0; color: #55554f; font-size: 13.5px; }
+
+    /* ---------- status ---------- */
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 38px 0 0;
+      color: var(--muted);
+      font: 11px/1.4 var(--mono);
+      letter-spacing: .08em;
+    }
+    .status i {
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: status-pulse 2.4s var(--ease-out) infinite;
+    }
+    @keyframes status-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(45, 187, 114, .5); }
+      70%, 100% { box-shadow: 0 0 0 9px rgba(45, 187, 114, 0); }
+    }
+
+    /* ---------- stats ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--ink);
+      margin: clamp(20px, 3vw, 34px) 0 0;
+      background: #fff;
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+    .stat {
+      padding: 26px 22px 22px;
+      border-right: 1px solid var(--line);
+    }
+    .stat:last-child { border-right: 0; }
+    .stat b {
+      display: flex;
+      align-items: baseline;
+      font: 800 clamp(40px, 5.5vw, 76px)/.9 var(--sans);
+      letter-spacing: -.045em;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat b i {
+      font-style: normal;
+      color: var(--violet);
+      font-size: .6em;
+    }
+    .stat-label {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font: 10px/1.5 var(--mono);
+      letter-spacing: .1em;
+    }
+
+    /* ---------- flow ---------- */
+    .flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 1px;
+      margin-top: 10px;
+      padding-top: 30px;
+    }
+    .flow::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      transition: transform 1.1s var(--ease-io) .1s;
+    }
+    .flow.is-in::before { transform: scaleX(1); }
+    .flow-item {
+      position: relative;
+      min-height: 168px;
+      padding: 16px 20px 16px 0;
+      border-right: 1px solid var(--line);
+    }
+    .flow-item:last-child { border-right: 0; }
+    .flow-item + .flow-item { padding-left: 20px; }
+    .flow-ghost {
+      position: absolute;
+      top: 6px;
+      right: 14px;
+      font: 800 64px/.8 var(--sans);
+      letter-spacing: -.05em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(134, 59, 255, .3);
+      pointer-events: none;
+    }
+    .flow-item > span:not(.flow-ghost) {
+      display: block;
+      margin-bottom: 26px;
+      color: var(--violet);
+      font: 11px/1 var(--mono);
+    }
+    .flow-item strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 20px;
+      letter-spacing: -.03em;
+    }
+    .flow-item p { margin: 0; color: var(--muted); font-size: 12.5px; }
+
+    /* ---------- outro ---------- */
+    .outro {
+      display: grid;
+      gap: 30px;
+      justify-items: start;
+      padding: clamp(48px, 8vw, 96px) 0 64px;
+      border-top: 1px solid var(--line);
+    }
+    .outro .status { margin: 0; }
+
+    .back {
+      display: inline-block;
+      color: var(--ink);
+      font: 600 clamp(19px, 3vw, 34px)/1.15 var(--mono);
+      letter-spacing: .02em;
+      text-decoration: none;
+      transition: transform .16s var(--ease-out);
+    }
+    .back:active { transform: scale(.97); }
+    .magnetic-inner { display: inline-block; transition: transform .3s var(--ease-out); }
+    .roll { position: relative; display: inline-block; overflow: hidden; }
+    .roll-line { display: block; transition: transform .5s var(--ease-out); }
+    .roll-line + .roll-line {
+      position: absolute;
+      inset: 0;
+      color: var(--violet);
+      transform: translateY(110%);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .back:hover .roll-line:first-child { transform: translateY(-110%); }
+      .back:hover .roll-line + .roll-line { transform: translateY(0); }
+    }
+
+    .outro-foot {
+      margin: 0;
+      color: var(--muted);
+      font: 10px/1.5 var(--mono);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- scroll reveal ---------- */
+    html.js [data-reveal]:not([data-reveal="line"]) {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+      transition-delay: calc(var(--i, 0) * 70ms);
+    }
+    html.js [data-reveal].is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .loader, .cursor-ring, .scroll-hint i { display: none !important; }
+      html.js .mask-line,
+      html.js [data-hero-fade],
+      html.js [data-reveal]:not([data-reveal="line"]),
+      html.js .topline {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .flow::before { transform: scaleX(1); }
+      .hero-main, .hero-side, .hero-badge { transform: none; }
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        min-height: 0;
+        padding: 118px 0 84px;
+      }
+      .hero-badge, .cursor-ring { display: none !important; }
+      .chapters { top: 44px; overflow-x: auto; scrollbar-width: none; }
+      .chapters::-webkit-scrollbar { display: none; }
+      .chapters a { white-space: nowrap; }
+      .grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+      .flow { grid-template-columns: 1fr 1fr; }
+      .flow-item { min-height: 0; padding: 16px 20px 22px 0; }
+      .flow-item + .flow-item { padding-left: 0; }
+      .flow-item:nth-child(2n) { border-right: 0; padding-left: 20px; }
+      .chapter-head { grid-template-columns: auto 1fr; }
+      .chapter-note { grid-column: 1 / -1; text-align: left; }
+    }
+    @media (max-width: 620px) {
+      .lede { font-size: 15px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+      .stat:last-child { border-bottom: 0; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .flow-item:last-child { border-bottom: 0; }
+      .flow-item + .flow-item { padding-left: 0; }
+      .chapter-index { -webkit-text-stroke-width: 1px; }
+      .topline span { letter-spacing: .06em; }
+    }
+    /* Shared project illustration lives behind content; it is not a separate poster. */
+    .hero { isolation: isolate; }
+    .hero::before { content: ""; position: absolute; inset: 35px calc(-1 * var(--gutter)) 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgba(240,239,235,.94) 0%, rgba(240,239,235,.86) 43%, rgba(240,239,235,.3) 100%), url("../../visuals/training/cover.png") 65% center / cover no-repeat; -webkit-mask-image: linear-gradient(transparent, #000 14% 72%, transparent); mask-image: linear-gradient(transparent, #000 14% 72%, transparent); }
+    .hero-side .lede { color: #394957; }
+    @media(max-width:760px) { .hero::before { background-position: 60% center; opacity: .7; } }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <span class="loader-word">CONTENT PLATFORM<br />TOOLS & TRAINING</span>
+      <span class="loader-count">000</span>
+    </div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><i></i></div>
+
+  <header class="topline">
+    <span>TOOL PLATFORM / CONTENT TRAINING</span>
+    <b>LOCAL DEMO / 01</b>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-main">
+        <p class="hero-kicker" data-hero-fade style="--d:60ms"><b>内容工作台</b> — 让个人方法变成团队能力 © 2026</p>
+        <h1>
+          <span class="mask"><span class="mask-line" style="--d:140ms">让个人的方法</span></span>
+          <span class="mask"><span class="mask-line" style="--d:260ms"><em>继续被使用。</em></span></span>
+        </h1>
+      </div>
+      <div class="hero-side">
+        <p class="lede" data-hero-fade style="--d:420ms">把工具上传、培训课程、评分讨论与发布流程放在同一个工作台里。提交之后即可被找到、被学习、被复用。</p>
+        <ul class="hero-meta" data-hero-fade style="--d:540ms">
+          <li>YEAR <b>2026</b></li>
+          <li>ROLE <b>产品设计 · 独立搭建</b></li>
+          <li>FOCUS <b>工具复用 · 学习传递</b></li>
+        </ul>
+      </div>
+      <svg class="hero-badge" viewBox="0 0 120 120" aria-hidden="true" data-hero-fade style="--d:640ms">
+        <defs>
+          <path id="badge-ring" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" fill="none" />
+        </defs>
+        <g class="badge-spin">
+          <text><textPath href="#badge-ring">FIND · LEARN · REUSE · CONTENT TRAINING ·&#160;</textPath></text>
+        </g>
+        <circle class="badge-core" cx="60" cy="60" r="5" />
+      </svg>
+      <p class="scroll-hint" data-hero-fade style="--d:720ms">SCROLL <i>↓</i></p>
+    </section>
+
+    <aside class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk">
+          <span>提交即上架</span><em>✳</em><span>内容可以被找到</span><em>✳</em><span>被学习</span><em>✳</em><span>被复用</span><em>✳</em><span>TOOL LIBRARY</span><em>✳</em><span>TRAINING CENTER</span><em>✳</em><span>PUBLISH PIPELINE</span><em>✳</em>
+        </div>
+        <div class="marquee-chunk">
+          <span>提交即上架</span><em>✳</em><span>内容可以被找到</span><em>✳</em><span>被学习</span><em>✳</em><span>被复用</span><em>✳</em><span>TOOL LIBRARY</span><em>✳</em><span>TRAINING CENTER</span><em>✳</em><span>PUBLISH PIPELINE</span><em>✳</em>
+        </div>
+      </div>
+    </aside>
+
+    <nav class="chapters" aria-label="章节导航">
+      <a href="#overview" class="is-active"><i>01</i>平台总览</a>
+      <a href="#training"><i>02</i>培训中心</a>
+      <a href="#pipeline"><i>03</i>制作与发布</a>
+    </nav>
+
+    <section class="chapter" id="overview" aria-labelledby="overview-title">
+      <header class="chapter-head">
+        <span class="chapter-index" aria-hidden="true" data-reveal style="--i:0">01</span>
+        <h2 id="overview-title" data-reveal style="--i:1">工具、课程、协作</h2>
+        <p class="chapter-note" data-reveal style="--i:2">团队日常在用 / 可独立体验</p>
+      </header>
+      <div class="grid">
+        <article class="card" data-reveal style="--i:0">
+          <small>01 / TOOL LIBRARY</small>
+          <h3>工具库</h3>
+          <p>上传、下载、点赞、四维评分和讨论，让可复用的工具拥有自己的上下文。</p>
+        </article>
+        <article class="card" data-reveal style="--i:1">
+          <small>02 / TRAINING CENTER</small>
+          <h3>培训中心</h3>
+          <p>基础课、工作台和实践课以独立页面呈现，课程不被一次会议消耗掉。</p>
+        </article>
+        <article class="card" data-reveal style="--i:2">
+          <small>03 / PUBLISH STATUS</small>
+          <h3>发布状态</h3>
+          <p>工具与课程先本地存档，再回写可访问地址与部署状态。</p>
+        </article>
+      </div>
+      <div class="stats" aria-label="平台规模">
+        <div class="stat" data-reveal style="--i:0"><b><span data-count="1">0</span></b><span class="stat-label">人从产品到上线</span></div>
+        <div class="stat" data-reveal style="--i:1"><b><span data-count="6">0</span></b><span class="stat-label">核心模块</span></div>
+        <div class="stat" data-reveal style="--i:2"><b><span data-count="20">0</span><i>+</i></b><span class="stat-label">功能页面</span></div>
+        <div class="stat" data-reveal style="--i:3"><b>团队</b><span class="stat-label">日常在用</span></div>
+      </div>
+      <p class="status" data-reveal style="--i:4"><i></i> 提交 → 存档 → 发布 → 可访问</p>
+    </section>
+
+    <section class="chapter" id="training" aria-labelledby="training-title">
+      <header class="chapter-head">
+        <span class="chapter-index" aria-hidden="true" data-reveal style="--i:0">02</span>
+        <h2 id="training-title" data-reveal style="--i:1">培训内容是一组可进入的 H5</h2>
+        <p class="chapter-note" data-reveal style="--i:2">COURSE UNITS / LOCAL FIRST</p>
+      </header>
+      <div class="grid">
+        <article class="card" data-reveal style="--i:0">
+          <small>TRAIN / BASIC</small>
+          <h3>基础课程</h3>
+          <p>按章节组织方法和工具，不把培训压成一张长文档。</p>
+        </article>
+        <article class="card" data-reveal style="--i:1">
+          <small>TRAIN / AI WORKBENCH</small>
+          <h3>AI 工作台</h3>
+          <p>把真实演示、练习和反馈放在同一个可以反复打开的空间。</p>
+        </article>
+        <article class="card" data-reveal style="--i:2">
+          <small>TRAIN / PRACTICE</small>
+          <h3>练习与复盘</h3>
+          <p>让学习者在完成动作后看到结果，而不是只看完成记录。</p>
+        </article>
+      </div>
+    </section>
+
+    <aside class="marquee marquee--violet" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk">
+          <span>TEAM IN USE</span><em>✳</em><span>6 MODULES</span><em>✳</em><span>20+ PAGES</span><em>✳</em><span>FIND · LEARN · REUSE</span><em>✳</em><span>LOCAL FIRST</span><em>✳</em><span>SELF-CONTAINED</span><em>✳</em>
+        </div>
+        <div class="marquee-chunk">
+          <span>TEAM IN USE</span><em>✳</em><span>6 MODULES</span><em>✳</em><span>20+ PAGES</span><em>✳</em><span>FIND · LEARN · REUSE</span><em>✳</em><span>LOCAL FIRST</span><em>✳</em><span>SELF-CONTAINED</span><em>✳</em>
+        </div>
+      </div>
+    </aside>
+
+    <section class="chapter" id="pipeline" aria-labelledby="pipeline-title">
+      <header class="chapter-head">
+        <span class="chapter-index" aria-hidden="true" data-reveal style="--i:0">03</span>
+        <h2 id="pipeline-title" data-reveal style="--i:1">我是怎么把它做出来的</h2>
+        <p class="chapter-note" data-reveal style="--i:2">WORKFLOW / FROM BRIEF TO SHARE</p>
+      </header>
+      <div class="flow" data-reveal="line">
+        <div class="flow-item" data-reveal style="--i:0">
+          <span class="flow-ghost" aria-hidden="true">01</span>
+          <span>01</span><strong>拆需求</strong>
+          <p>把正式需求、课程和工具类型拆成可以被页面承接的对象。</p>
+        </div>
+        <div class="flow-item" data-reveal style="--i:1">
+          <span class="flow-ghost" aria-hidden="true">02</span>
+          <span>02</span><strong>搭结构</strong>
+          <p>页面承接阅读与操作，数据保存关系，文件单独存档；发布失败也不丢原稿。</p>
+        </div>
+        <div class="flow-item" data-reveal style="--i:2">
+          <span class="flow-ghost" aria-hidden="true">03</span>
+          <span>03</span><strong>做成 H5</strong>
+          <p>CSS、JavaScript 和相对路径资源组成可以独立运行的培训单元。</p>
+        </div>
+        <div class="flow-item" data-reveal style="--i:3">
+          <span class="flow-ghost" aria-hidden="true">04</span>
+          <span>04</span><strong>发出去</strong>
+          <p>上传后自动回写可访问地址与状态，保证分享时资源完整可打开。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="outro">
+      <p class="status" data-reveal style="--i:0"><i></i> 本地可完整体验</p>
+      <a class="back" href="../../../index.html#projects" data-reveal style="--i:1">
+        <span class="magnetic-inner roll">
+          <span class="roll-line">← 返回作品集</span>
+          <span class="roll-line" aria-hidden="true">← RETURN TO PROJECT ARCHIVE</span>
+        </span>
+      </a>
+      <p class="outro-foot" data-reveal style="--i:2">TOOL PLATFORM / CONTENT TRAINING — 2026</p>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+      const root = document.documentElement;
+      const body = document.body;
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      /* ---------- loader ---------- */
+      const loader = document.querySelector('.loader');
+      const digits = loader ? loader.querySelector('.loader-count') : null;
+      const finishIntro = () => body.classList.add('is-loaded');
+      if (reduced || !loader || !digits) {
+        finishIntro();
+        if (loader) loader.remove();
+      } else {
+        const t0 = performance.now();
+        const DUR = 750;
+        const tick = now => {
+          const p = Math.min((now - t0) / DUR, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          digits.textContent = String(Math.round(eased * 100)).padStart(3, '0');
+          if (p < 1) requestAnimationFrame(tick);
+          else setTimeout(finishIntro, 150);
+        };
+        requestAnimationFrame(tick);
+        loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+        setTimeout(() => { if (!body.classList.contains('is-loaded')) finishIntro(); }, 2400);
+      }
+
+      /* ---------- scroll progress / topline / hero parallax ---------- */
+      let scrollQueued = false;
+      const onScroll = () => {
+        if (scrollQueued) return;
+        scrollQueued = true;
+        requestAnimationFrame(() => {
+          const max = Math.max(root.scrollHeight - innerHeight, 1);
+          root.style.setProperty('--progress', (scrollY / max).toFixed(4));
+          if (!reduced) root.style.setProperty('--hero-p', Math.min(scrollY / innerHeight, 1).toFixed(4));
+          body.classList.toggle('is-scrolled', scrollY > 10);
+          scrollQueued = false;
+        });
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* ---------- scroll reveal ---------- */
+      const revealEls = [...document.querySelectorAll('[data-reveal]')];
+      if (reduced || !('IntersectionObserver' in window)) {
+        revealEls.forEach(el => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          });
+        }, { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(el => io.observe(el));
+      }
+
+      /* ---------- chapter nav: scrollspy + sliding indicator ---------- */
+      const nav = document.querySelector('.chapters');
+      const navLinks = nav ? [...nav.querySelectorAll('a')] : [];
+      const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+      const setActive = link => {
+        if (!link) return;
+        navLinks.forEach(a => a.classList.toggle('is-active', a === link));
+        nav.style.setProperty('--nav-x', link.offsetLeft + 'px');
+        nav.style.setProperty('--nav-w', link.offsetWidth + 'px');
+      };
+      if (nav && navLinks.length) {
+        setActive(navLinks[0]);
+        const spy = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const index = sections.indexOf(entry.target);
+            if (index > -1) setActive(navLinks[index]);
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(section => section && spy.observe(section));
+        addEventListener('resize', () => {
+          setActive(navLinks.find(a => a.classList.contains('is-active')) || navLinks[0]);
+        }, { passive: true });
+        navLinks.forEach(a => a.addEventListener('click', event => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          history.replaceState(null, '', a.getAttribute('href'));
+        }));
+      }
+
+      /* ---------- stat count-up ---------- */
+      const counters = [...document.querySelectorAll('[data-count]')];
+      const runCount = el => {
+        const target = parseInt(el.dataset.count, 10) || 0;
+        const t0 = performance.now();
+        const DUR = 950;
+        const step = now => {
+          const p = Math.min((now - t0) / DUR, 1);
+          const eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = String(Math.round(eased * target));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      if (reduced || !('IntersectionObserver' in window)) {
+        counters.forEach(el => { el.textContent = el.dataset.count; });
+      } else {
+        const countIo = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            runCount(entry.target);
+            countIo.unobserve(entry.target);
+          });
+        }, { threshold: .6 });
+        counters.forEach(el => countIo.observe(el));
+      }
+
+      /* ---------- magnetic back link ---------- */
+      if (fine && !reduced) {
+        document.querySelectorAll('.back').forEach(el => {
+          const inner = el.querySelector('.magnetic-inner') || el;
+          let raf = 0;
+          el.addEventListener('pointermove', event => {
+            const rect = el.getBoundingClientRect();
+            const dx = (event.clientX - rect.left - rect.width / 2) * .22;
+            const dy = (event.clientY - rect.top - rect.height / 2) * .38;
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+              inner.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+            });
+          });
+          el.addEventListener('pointerleave', () => {
+            cancelAnimationFrame(raf);
+            inner.style.transform = 'translate(0px, 0px)';
+          });
+        });
+      }
+
+      /* ---------- cursor ring ---------- */
+      const ring = document.querySelector('.cursor-ring');
+      if (ring && fine && !reduced && innerWidth > 900) {
+        body.classList.add('has-cursor');
+        let x = innerWidth / 2;
+        let y = innerHeight / 2;
+        let targetX = x;
+        let targetY = y;
+        addEventListener('pointermove', event => {
+          targetX = event.clientX;
+          targetY = event.clientY;
+        }, { passive: true });
+        const follow = () => {
+          x += (targetX - x) * .18;
+          y += (targetY - y) * .18;
+          ring.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+          requestAnimationFrame(follow);
+        };
+        requestAnimationFrame(follow);
+        const HOVERABLE = 'a, button, [data-cursor]';
+        document.addEventListener('pointerover', event => {
+          if (event.target.closest(HOVERABLE)) ring.classList.add('is-on');
+        });
+        document.addEventListener('pointerout', event => {
+          if (event.target.closest(HOVERABLE)) ring.classList.remove('is-on');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

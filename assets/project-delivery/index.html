@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b161c">
+  <meta name="description" content="邵笛珂的英语项目经历：从产品需求、平台建设、量产标准到跨域协调、可行性评审与上线跟踪。">
+  <title>把交付串起来 · 邵笛珂的项目经历</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#journey">跳到项目经历</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <canvas id="thread-canvas" aria-hidden="true"></canvas>
+  <header class="site-header">
+    <a class="identity" href="../../index.html#experience"><span class="identity-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>邵笛珂<small>内容 AI 研发 / 项目负责人</small></span></a>
+    <div class="header-actions"><button id="motion-toggle" type="button" aria-pressed="false">暂停动效</button><a href="#record">进度记录 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title"><span>把需求接住，</span><br><em>把交付串起来。</em></h1>
+        <p class="hero-role">英语项目 · 内容侧的项目推动者</p>
+        <p class="hero-description">从一个产品想法，到一批可以上线的内容。<br>我把技术能力、制作标准与跨团队协作，<br>组织成同一条可推进的交付链。</p>
+        <a class="text-link" href="#journey">走进这条交付链 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-6-6 6 6 6-6"/></svg></a>
+      </div>
+      <div class="hero-art-note" aria-hidden="true"><span>PRODUCT</span><i></i><span>CONTENT</span><i></i><span>DELIVERY</span></div>
+      <div class="hero-footer"><p>产品 · 研发 · 制作 · 品检 · 商务</p><span>六个阶段 / 一条交付链</span><a href="#journey" aria-label="向下阅读"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9l5 5 5-5"/></svg></a></div>
+    </section>
+
+    <section class="opening section-shell" aria-labelledby="opening-title">
+      <p class="opening-aside">我的工作，是把环节之间的空隙接上。</p>
+      <div><h2 id="opening-title">每个环节都有人做。<br><em>但交付，需要有人串起来。</em></h2><p>需求能不能做、平台能不能交给制作、什么结果可以过检、风险会不会影响排期——我沿着同一条链路，持续把问题转成标准、任务与决策依据。</p></div>
+    </section>
+
+    <nav class="chapter-nav" aria-label="项目经历章节">
+      <a href="#phase-1" aria-current="step"><span>01</span> 评估</a><a href="#phase-2"><span>02</span> 建设</a><a href="#phase-3"><span>03</span> 标准</a><a href="#phase-4"><span>04</span> 协调</a><a href="#phase-5"><span>05</span> 评审</a><a href="#phase-6"><span>06</span> 上线</a>
+      <div class="chapter-progress" aria-hidden="true"><i id="chapter-progress"></i></div>
+    </nav>
+
+    <section class="journey section-shell" id="journey" aria-label="从需求到上线的六个阶段">
+      <div class="chapter-list">
+        <article class="chapter" id="phase-1" data-phase="0">
+          <div class="chapter-heading"><span>01 / 需求承接</span><p>先回答：值得做，做得成吗？</p></div>
+          <h2>把产品想法，<br><em>落成可行路径。</em></h2>
+          <p class="chapter-lead">承接需求后，我先明确可行性、投入和实现条件，让后面的制作有依据。</p>
+          <ul class="action-list"><li><strong>输出需求可行性文档</strong><p>说明落地路径并同步给协作方，先对齐做什么、怎么做。</p></li><li><strong>把技术效果与成本放在一起看</strong><p>与后台核对裸眼效果的预计成本；参与 AI 生题提效核算，明确基准指标改善与人工成本之间的关系。</p></li></ul>
+          <div class="value-line"><span>留下的交付物</span><p>可行性文档、成本评估依据、需要验证的条件。</p></div>
+          <p class="chapter-value">让需求讨论进入可判断、可拆解的阶段。</p>
+        </article>
+        <article class="chapter" id="phase-2" data-phase="1">
+          <div class="chapter-heading"><span>02 / 平台建设</span><p>把重复劳动，转成平台能力。</p></div>
+          <h2>向技术提需求，<br><em>也把交付验到底。</em></h2>
+          <p class="chapter-lead">我从制作流程反推平台需求，既推动能力建设，也检查它能否真正交给制作使用。</p>
+          <ul class="action-list"><li><strong>定义四项自动化需求</strong><p>按教材版本自动触发生图、按语境 AI 自审、自审合格后自动打标、两次不合格的数据回流制作兜底。</p></li><li><strong>验收平台，识别使用风险</strong><p>组织验收，检查操作逻辑、图片重生流程，以及数据存储与上线的衔接。</p></li></ul>
+          <div class="value-line"><span>留下的交付物</span><p>平台需求、验收问题清单、修改与沟通事项。</p></div>
+          <p class="chapter-value">让技术能力对齐制作场景，减少人工接力。</p>
+          <small class="fact-note">10 月 9 日提出的需求；此处呈现方案，不代表全部能力已上线。</small>
+        </article>
+        <article class="chapter" id="phase-3" data-phase="2">
+          <div class="chapter-heading"><span>03 / 量产标准</span><p>能生成之后，还要能验收。</p></div>
+          <h2>让“可用”，<br><em>成为明确的规则。</em></h2>
+          <p class="chapter-lead">把技术能力转化为制作与品检能共同执行的标准：什么算合格、什么必须改、失败后回到哪里。</p>
+          <ul class="action-list"><li><strong>把 TTS 要求写入 TRD 与品检规范</strong><p>核算 A、B 类问题的审核和修正成本，区分上线前必须修改与可以接受上线的问题。</p></li><li><strong>定义品检与资源复用的回流路径</strong><p>图片不合格打回重生；视频人声打回处理；运动问题打标；关键词不清重新生图。</p></li></ul>
+          <div class="quality-lab"><h3>一条内容不合格，下一步去哪？</h3><div class="quality-options" role="group" aria-label="选择品检问题"><button type="button" data-quality="context" aria-pressed="true">图片语境不符</button><button type="button" data-quality="voice" aria-pressed="false">视频含人声</button><button type="button" data-quality="motion" aria-pressed="false">运动异常</button><button type="button" data-quality="keyword" aria-pressed="false">关键词不清</button></div><label class="retry-option"><input id="repeat-failure" type="checkbox">模拟连续两次自审不合格</label><div class="quality-result" aria-live="polite"><span>处理去向</span><strong id="quality-destination">重新生图</strong><p id="quality-description">先检查复用图片是否符合当前语境；不合格则打回重生，再进入审核。</p></div><small>规则交互示意，不连接生产任务。</small></div>
+          <div class="value-line"><span>留下的交付物</span><p>TRD 规范、品检规则、兜底方案与修正成本口径。</p></div>
+        </article>
+        <article class="chapter" id="phase-4" data-phase="3">
+          <div class="chapter-heading"><span>04 / 跨域协调</span><p>对齐各自进度，也对齐彼此依赖。</p></div>
+          <h2>把不同团队，<br><em>接进同一张计划。</em></h2>
+          <p class="chapter-lead">制作、技术、品检与供应商各有自己的节奏，我跟进它们如何共同影响交付。</p>
+          <ul class="action-list"><li><strong>跟进内容的三条制作线</strong><p>TRD 制作与审核、图片制作与品检、TTS 离线生成与修正，分别明确进度和卡点。</p></li><li><strong>协调修改链路与交付节点</strong><p>与技术确认 TTS 修改的交付方式，评估对数据交付时间的影响。</p></li><li><strong>推进供应商试做与培训</strong><p>参与量产前准备和商务对接，跟踪试做结果，处理未启动任务的暂停安排。</p></li></ul>
+          <div class="value-line"><span>留下的交付物</span><p>各领域进度、依赖关系、交付链路与供应商准备情况。</p></div>
+          <p class="chapter-value">让局部的“已完成”，能够接上整体的“可交付”。</p>
+        </article>
+        <article class="chapter" id="phase-5" data-phase="4">
+          <div class="chapter-heading"><span>05 / 可行性评审</span><p>扩大制作之前，先把风险摆到桌面。</p></div>
+          <h2>量产之前，<br><em>先过可行性这一关。</em></h2>
+          <p class="chapter-lead">我组织全流程可行性评审，把未确认事项转换成需要解决的前置条件。</p>
+          <ul class="action-list"><li><strong>提前暴露两个评审风险</strong><p>TTS 审核修改成本评估待定；平台尚无法交付给内容制作。10 月 8 日同步风险，并说明其对评审安排的影响。</p></li><li><strong>围绕条件推进评审排期</strong><p>安排 10 月 10 日 14:30 的人教、外研版本内容量产可行性评审，对齐全链路准备情况。</p></li></ul>
+          <div class="value-line"><span>留下的交付物</span><p>风险清单、评审前置条件、跨领域评审安排。</p></div>
+          <p class="chapter-value">让是否量产有依据，避免把待验证问题直接放大。</p>
+          <small class="fact-note">已有记录确认评审安排，未提供评审通过结论。</small>
+        </article>
+        <article class="chapter" id="phase-6" data-phase="5">
+          <div class="chapter-heading"><span>06 / 上线跟踪</span><p>交付状态，一直跟到正式环境。</p></div>
+          <h2>从制作进度，<br><em>跟到实际的上线状态。</em></h2>
+          <p class="chapter-lead">按版本与批次推进数据上线，继续追踪未决链路，避免把“做完了”和“上线了”混在一起。</p>
+          <ul class="action-list"><li><strong>安排版本与批次排期</strong><p>推进 PEP 四、五年级图片和视频进入正式环境，统筹自拼数据及剩余书本的上线安排。</p></li><li><strong>持续更新已完成与待解决事项</strong><p>10 月 9 日一、三年级前两单元 demo 已在后台上线；10 月 10 日更新 15 日交付进度：TRD 已完成，图片正常推进，TTS 链路待沟通。</p></li></ul>
+          <div class="value-line"><span>留下的交付物</span><p>批次排期、上线状态、交付进度与待决链路。</p></div>
+          <p class="chapter-value">把交付承诺落到具体批次和可跟踪状态。</p>
+        </article>
+      </div>
+      <aside class="journey-visual" aria-label="当前阶段流程示意">
+        <div class="visual-sticky">
+          <div class="visual-header"><span>交付链路</span><span id="scene-counter">01 / 06</span></div>
+          <svg class="flow-map" viewBox="0 0 520 560" role="img" aria-labelledby="map-title"><title id="map-title">需求、技术、标准、协作、评审、上线六阶段相互衔接</title><defs><linearGradient id="flow-gradient" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#badfdc"/><stop offset="1" stop-color="#d9b989"/></linearGradient></defs><path class="map-base" d="M100 90 C100 175 410 65 410 180 S110 200 110 275 S410 285 410 360 S120 400 120 460 S330 520 395 500"/><path class="map-active" id="map-active" d="M100 90 C100 175 410 65 410 180 S110 200 110 275 S410 285 410 360 S120 400 120 460 S330 520 395 500" pathLength="100"/>
+          <g class="map-node is-active" transform="translate(100 90)"><circle r="23"/><circle class="node-core" r="5"/><text x="36" y="-5">需求评估</text><text class="node-sub" x="36" y="16">可行性 · 成本</text></g>
+          <g class="map-node" transform="translate(410 180)"><circle r="23"/><circle class="node-core" r="5"/><text x="-36" y="-5" text-anchor="end">平台建设</text><text class="node-sub" x="-36" y="16" text-anchor="end">需求 · 验收</text></g>
+          <g class="map-node" transform="translate(110 275)"><circle r="23"/><circle class="node-core" r="5"/><text x="36" y="-5">量产标准</text><text class="node-sub" x="36" y="16">品检 · 回流</text></g>
+          <g class="map-node" transform="translate(410 360)"><circle r="23"/><circle class="node-core" r="5"/><text x="-36" y="-5" text-anchor="end">跨域协调</text><text class="node-sub" x="-36" y="16" text-anchor="end">任务 · 依赖</text></g>
+          <g class="map-node" transform="translate(120 460)"><circle r="23"/><circle class="node-core" r="5"/><text x="36" y="-5">可行性评审</text><text class="node-sub" x="36" y="16">风险 · 决策条件</text></g>
+          <g class="map-node" transform="translate(395 500)"><circle r="23"/><circle class="node-core" r="5"/><text x="0" y="45" text-anchor="middle">上线跟踪</text></g></svg>
+          <div class="scene-caption"><span id="scene-label">需求不是起点的一句话。</span><p id="scene-copy">把预期效果、成本和技术条件放到一起，形成能讨论、能执行的可行路径。</p></div>
+          <p class="visual-note">流程示意 · 随阅读逐段展开</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="record section-shell" id="record" aria-labelledby="record-title">
+      <div class="record-title"><h2 id="record-title">把推进过程，<br><em>留在具体的记录里。</em></h2><p>以下按已有记录呈现。<br>安排、进展与上线，各有各的状态。</p></div>
+      <ol class="record-list">
+        <li><time datetime="10-08">10.08</time><div><span class="state state-risk">风险已同步</span><h3>先把两项阻塞说清楚</h3><p>TTS 审核修改成本待评估，平台尚无法交付制作；同步它们对量产评审的影响。</p></div></li>
+        <li><time datetime="10-09">10.09</time><div><span class="state">需求已提出</span><h3>把平台能力拆成四项需求</h3><p>自动触发生图、语境自审、合格打标、两次失败回流兜底。</p><span class="record-inline">同期结果：一、三年级前两单元 demo 已在后台上线。</span></div></li>
+        <li><time datetime="10-10">10.10</time><div><span class="state state-plan">评审已安排</span><h3>14:30 · 全流程量产可行性评审</h3><p>人教、外研版本内容的量产可行性评审日程；当前材料未提供最终评审结论。</p></div></li>
+        <li><time datetime="10-15">10.15</time><div><span class="state state-plan">计划交付节点</span><h3>向交付日倒排，持续跟踪差距</h3><p>截至 10 月 10 日：TRD 已完成；图片制作与品检正常推进；TTS 交付链路待沟通。</p></div></li>
+      </ol>
+    </section>
+    <section class="closing section-shell" aria-labelledby="closing-title">
+      <p class="closing-lead">我带来的价值</p><h2 id="closing-title">让技术能力，<br><em>接得上真实交付。</em></h2>
+      <div class="closing-values"><p><strong>把模糊需求变成依据</strong><span>可行性、投入、验证条件。</span></p><p><strong>把技术能力变成流程</strong><span>平台需求、制作标准、品检回流。</span></p><p><strong>把跨团队协作变成行动</strong><span>任务依赖、风险评审、批次上线。</span></p></div>
+      <div class="closing-links"><a class="text-link" href="../../index.html#experience">返回个人作品集 <span aria-hidden="true">↗</span></a><a class="text-link" href="#top">回到开场 <span aria-hidden="true">↑</span></a></div>
+      <footer><span>邵笛珂 · 英语项目经历</span><span>按 10 月工作记录整理</span></footer>
+    </section>
+  </main>
+</body>
+</html>
+

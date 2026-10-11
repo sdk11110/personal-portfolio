@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN" data-scale-mode="presentation">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#eaf1eb" />
+  <title>手表互联 · 内容生产工作台</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <div class="grid-field" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="back-link" href="../../index.html#watch-link" aria-label="返回作品集主页">
+      <span>←</span><span>作品集</span>
+    </a>
+    <div class="brand-mark" aria-label="Watch Link">
+      <i></i><span>WATCH LINK</span><small>03 / WORKFLOW</small>
+    </div>
+    <div class="system-status"><i></i><span>WORKBENCH READY</span><b data-clock>--:--</b></div>
+  </header>
+
+  <main>
+    <section class="hero-copy" aria-labelledby="page-title">
+      <p class="eyebrow">FROM SOURCE IMAGE TO FINAL DELIVERY</p>
+      <h1 id="page-title">手表互联<br /><em>内容生产工作台</em></h1>
+      <p class="hero-intro">把素材处理、图生视频、字幕编排与最终裁剪装进同一套工作台。这里展示的不只是一条成片，而是我如何把生产与交付收成一条可继续运转的链路。</p>
+      <dl class="hero-stats">
+        <div><dt>07</dt><dd>单词生产任务</dd></div>
+        <div><dt>06</dt><dd>制作阶段</dd></div>
+        <div><dt>01</dt><dd>统一交付出口</dd></div>
+      </dl>
+    </section>
+
+    <section class="workbench" aria-label="手表互联工作台演示">
+      <aside class="panel task-panel">
+        <div class="panel-heading">
+          <span>01 / TASK QUEUE</span>
+          <b><i></i>7 ITEMS</b>
+        </div>
+        <h2>单词任务</h2>
+        <p>选择一条任务，查看平台生成并装配进手表的最终内容。</p>
+        <div class="word-list" data-word-list role="listbox" aria-label="单词任务列表"></div>
+        <div class="batch-card">
+          <div><span>批处理状态</span><strong>READY TO EXPORT</strong></div>
+          <div class="batch-progress"><i></i></div>
+          <small><b>7 / 7</b> 素材已完成本地归档</small>
+        </div>
+      </aside>
+
+      <div class="device-stage" data-device-stage>
+        <div class="stage-topline">
+          <span>DEVICE PREVIEW / 真实设备预览</span>
+          <div class="scale-control" aria-label="手表显示比例">
+            <button type="button" data-scale-toggle="physical">1:1</button>
+            <button type="button" data-scale-toggle="presentation" class="is-active">演示放大</button>
+          </div>
+        </div>
+
+        <div class="device-halo" aria-hidden="true"></div>
+        <div class="watch-wrap">
+          <div class="watch-device" data-watch-device>
+            <img src="media/watch-device.png" alt="蓝灰色儿童电话手表正面产品图" />
+            <button class="watch-screen" type="button" data-watch-screen aria-label="暂停或继续手表视频">
+              <video data-screen-video muted playsinline preload="metadata"></video>
+              <img data-screen-image alt="" />
+              <span class="screen-shade" aria-hidden="true"></span>
+              <span class="screen-status"><i></i><b data-screen-status>VIDEO OUTPUT</b><em data-screen-counter>01 / 07</em></span>
+              <span class="screen-caption">
+                <strong data-screen-word>woof</strong>
+                <small data-screen-phonetic>/wʊf/</small>
+                <b data-screen-zh>吠叫</b>
+              </span>
+              <span class="pause-indicator" data-pause-indicator aria-hidden="true">▶</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="device-caption" aria-live="polite">
+          <span>当前成片</span>
+          <strong data-caption-word>WOOF</strong>
+          <i></i>
+          <b data-caption-zh>吠叫</b>
+        </div>
+        <div class="device-toolbar">
+          <button type="button" data-prev-word aria-label="上一个单词">← PREV</button>
+          <button type="button" data-sound-toggle aria-pressed="false"><span>声音</span><b>OFF</b></button>
+          <button type="button" data-next-word aria-label="下一个单词">NEXT →</button>
+        </div>
+        <p class="scale-note" data-scale-note>演示放大模式 · 便于查看表盘内容</p>
+      </div>
+
+      <aside class="panel capability-panel">
+        <div class="panel-heading">
+          <span>02 / TOOLCHAIN</span>
+          <b><i></i>AUTOMATED</b>
+        </div>
+        <h2>平台能力</h2>
+        <p>点击流程节点，查看“一键生产”背后的工具设计和自动化处理。</p>
+        <div class="stage-list" data-stage-list role="tablist" aria-label="生产工具阶段"></div>
+        <article class="stage-detail" data-stage-detail aria-live="polite">
+          <div class="stage-detail-head"><span data-stage-code>INPUT / 01</span><b data-stage-state>READY</b></div>
+          <h3 data-stage-title>素材输入</h3>
+          <p data-stage-description></p>
+          <dl data-stage-metrics></dl>
+        </article>
+      </aside>
+    </section>
+
+    <section class="pipeline-story" aria-labelledby="pipeline-title">
+      <div class="story-heading">
+        <p class="eyebrow">ONE CLICK IS A DESIGNED SYSTEM</p>
+        <h2 id="pipeline-title">一键生产，背后是六段可控流程</h2>
+        <p>我负责的不只是生成画面，而是把分散工具组织成可追踪、可复用、可交付的平台。</p>
+      </div>
+      <div class="pipeline-track" data-pipeline-track></div>
+    </section>
+
+    <section class="delivery-story" aria-labelledby="delivery-title">
+      <div class="delivery-visual" aria-hidden="true">
+        <span class="delivery-line"></span>
+        <div class="delivery-file source"><small>INPUT</small><strong>IMG</strong><i>2328 × 1600</i></div>
+        <div class="delivery-file edit"><small>TIMELINE</small><strong>CUT</strong><i>TRIM / SYNC</i></div>
+        <div class="delivery-file output"><small>OUTPUT</small><strong>MP4</strong><i>WATCH READY</i></div>
+      </div>
+      <div class="delivery-copy">
+        <p class="eyebrow">FINAL DELIVERY / MY RESPONSIBILITY</p>
+        <h2 id="delivery-title">生成不是终点，<br />最终交付才是。</h2>
+        <p>我根据电话手表的显示比例、播放时长和交付规范继续完成视频裁剪、字幕安全区校正、音画同步与批量命名，保证生成结果真正进入设备。</p>
+        <ul>
+          <li><span>01</span><b>目标规格</b><em>先定义尺寸、时长与安全区</em></li>
+          <li><span>02</span><b>视频裁剪</b><em>按内容焦点重构设备画幅</em></li>
+          <li><span>03</span><b>批量交付</b><em>校验、命名并形成统一出口</em></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>WATCH LINK / 2024—2026</span><span>LOCAL PORTABLE SHOWCASE</span></footer>
+  <audio data-word-audio preload="auto"></audio>
+  <script src="app.js?v=20260905-year-zebra"></script>
+</body>
+</html>
